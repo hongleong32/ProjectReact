@@ -13,7 +13,7 @@ Follow until step 2.
 Once you had done setup, clone this project and copy all the scripts 
 into src folder that you had created through steps just now.
 
-Now follow step 4 from the website i had share to you.
+Next, follow step 4 from the website i had share to you.
 
 Now you can play simple weather app demo.
 
