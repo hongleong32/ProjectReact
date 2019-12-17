@@ -1,0 +1,55 @@
+.grid-container {
+    display: grid;
+    grid-gap: 1em;
+}
+
+.grid-container--fill {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.grid-container--fit {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+.grid-element {
+  background-color: deepPink;
+  padding: 0px;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.grid-element:hover {
+    background: url('https://dummyimage.com/100/e61e2e/fff');
+}
+
+
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+.center-container  {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.center-search-result-box {
+    margin: auto;
+    width: 40%;
+    border: 3px solid green;
+    text-align: center;
+    min-height: 150px;
+}
+
+.center-search-result-box:hover {
+    background: url('https://dummyimage.com/100/1ce634/fff');
+}
+
+body {
+  padding: 2em;
+}
+
