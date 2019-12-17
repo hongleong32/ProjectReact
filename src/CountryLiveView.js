@@ -3,12 +3,16 @@ import UserContext from './UserContext';
 
 function CountryLiveView() {
     const { countryTrackList, removeItemFromCountryTrackList } = useContext(UserContext);
-    console.log('countryTrackList', countryTrackList);
 
+    /**
+     * Use unique country id to remove selected item from list
+     * @param {number} id 
+     */
     const removeItem = (id) => {
         removeItemFromCountryTrackList(id);
     }
 
+    // Create list of elements
     const countryLiveList = countryTrackList.map(item => {
         const weatherIconUrl = "http://openweathermap.org/img/w/" + item.weather[0].icon + ".png";;
         return (

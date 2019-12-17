@@ -3,14 +3,12 @@ import UserContext from './UserContext';
 import { setupAutoTrack, clearAutoTrack } from './AutoTrackWeatherSystem';
 
 const reducer = (state, action) => {
-    console.log('enter reducer', action);
-    console.log('enter state', state);
-    if (action.type === "search_result") {
+    if (action.type === "search_result") { // Update search country result data from open weather
         return {
             ...state,
             countrySearchResult: action.result
         }
-    } else if (action.type === "add_to_list") {
+    } else if (action.type === "add_to_list") { // Add country data into tracking list
         action.data.intervalSec = action.intervalSec;
         action.data.timerId = action.timerId;
         state.countryTrackList.push(action.data);
@@ -18,17 +16,17 @@ const reducer = (state, action) => {
             ...state,
             countryTrackList: state.countryTrackList
         }
-    } else if (action.type === "input_country_name") {
+    } else if (action.type === "input_country_name") { // Catch country name that user key in
         return {
             ...state,
             inputText: action.result
         }
-    } else if (action.type === "clear_search_result") {
+    } else if (action.type === "clear_search_result") { // Clear country result data
         return {
             ...state,
             countrySearchResult: {}
         }
-    } else if (action.type === "remove_from_list") {
+    } else if (action.type === "remove_from_list") { // Remove country data from tracking list
         const list = state.countryTrackList;
         for (let i = 0, l = list.length; i < l; i++) {
             if (list[i].id === action.id) {
@@ -41,8 +39,7 @@ const reducer = (state, action) => {
             ...state,
             countryTrackList: state.countryTrackList
         }
-    } else if (action.type === "update_track_country") {
-        console.log('update_track_country', action.data.name, action.data.dt);
+    } else if (action.type === "update_track_country") { // Update country data on tracking list
         const list = state.countryTrackList;
         for (let i = 0, l = list.length; i < l; i++) {
             if (list[i].id === action.id) {
@@ -77,6 +74,7 @@ function MyProvider({ children }) {
         maxShowInList
     } = state;
 
+    // Call update country search result
     const updateCountrySearchResult = (result) => {
         dispatch({
             type: "search_result",
@@ -84,6 +82,7 @@ function MyProvider({ children }) {
         });
     }
 
+    // Handle add country data into tracking list
     const addInCountryTrackList = (data, intervalSec = 10) => {
         const list = countryTrackList;
         let hasSameId = false;
@@ -94,7 +93,6 @@ function MyProvider({ children }) {
             }
         }
 
-        console.log('haha', intervalSec);
         if (list.length < state.maxShowInList && !hasSameId) {
             const intervalInMili = intervalSec * 1000;
             const timerId = setupAutoTrack(data.name, intervalInMili, (data) => {
@@ -109,6 +107,7 @@ function MyProvider({ children }) {
         }
     }
 
+    // Handle remove country data from tracking list
     const removeItemFromCountryTrackList = (id) => {
         const list = state.countryTrackList;
         for (let i = 0, l = list.length; i < l; i++) {
@@ -123,6 +122,7 @@ function MyProvider({ children }) {
         });
     }
 
+    // Update country name that user key in
     const updateInputCountryName = (result) => {
         dispatch({
             type: "input_country_name",
@@ -130,12 +130,14 @@ function MyProvider({ children }) {
         });
     }
 
+    // Clear country data that been search
     const clearSearchResult = () => {
         dispatch({
             type: "clear_search_result"
         });
     }
 
+    // update country data on tracking list
     const updateTrackCountry = (data) => {
         dispatch({
             type: "update_track_country",

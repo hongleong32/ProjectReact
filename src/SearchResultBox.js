@@ -5,18 +5,24 @@ function SearchResultBox() {
     const { countrySearchResult, addInCountryTrackList } = useContext(UserContext);
     const [intervalText, setIntervalText] = useState("");
 
-    console.log('SearchResultBox', countrySearchResult);
-
     if (countrySearchResult.id) {
         let text = countrySearchResult.name;
+
+        // To show hover response
         const handleAddInCountryList = () => {
             console.log('got country data');
         }
+
+        // To call add data into track list
         const addInList = () => {
             const number = isNaN(intervalText) || intervalText === "" ? undefined : parseInt(intervalText);
-            console.log('number', number, intervalText);
             addInCountryTrackList(countrySearchResult, number);
         };
+
+        // Catch interval value that user key in
+        const updateIntervalText = (event) => {
+            setIntervalText(event.target.value)
+        }
 
         return (
             <div>
@@ -24,11 +30,11 @@ function SearchResultBox() {
                     <p>{text}</p>
                 </div>
                 <div className="center-container">
-                    <input name="intervalValue" placeholder="Write interval in seconds" onChange={(event) => { setIntervalText(event.target.value) }}></input>
+                    <input name="intervalValue" placeholder="Write interval in seconds" onChange={updateIntervalText}></input>
                 </div>
             </div>
         )
-    } else if (countrySearchResult.cod) {
+    } else if (countrySearchResult.cod) { // When data incorrect
         return (
             <div className="center-search-result-box">
                 <p>{countrySearchResult.message}</p>

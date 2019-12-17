@@ -15,8 +15,11 @@ function Main() {
         inputText
     } = useContext(UserContext);
 
+    /**
+     * Handle api call to get data from open weather map
+     * @param {*} event 
+     */
     const handleSearchCountry = (event) => {
-        console.log("inputText", inputText);
         if (inputText === "") {
             clearSearchResult();
             return;
@@ -29,6 +32,10 @@ function Main() {
             })
     }
 
+    /**
+     * Update country name that user key in
+     * @param {*} event 
+     */
     const saveInputCountryName = (event) => {
         updateInputCountryName(event.target.value);
     }
@@ -45,7 +52,6 @@ function Main() {
             <CountryLiveView />
         </div>
     );
-    // }
 }
 
 ReactDOM.render(
